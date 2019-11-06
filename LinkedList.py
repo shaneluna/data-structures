@@ -81,16 +81,12 @@ class LinkedList(object):
 	    return self
 
     def print_list(self):
-        if self.root is None:
-            print('[]')
-        strList = '['
+        l = []
         current = self.root
-        strList += str(current.get_data())
-        while current.has_next():
+        while current:
+            l.append(current.get_data())
             current = current.get_next()
-            strList += ', ' + str(current.get_data())
-        strList += ']'
-        print(strList)
+        print(l)
 
 myList = LinkedList()
 myList.add(5)
