@@ -65,7 +65,7 @@ class LinkedList(object):
         return None
 
     # Timsort
-    def sort (self):
+    def sort(self):
 	    if self.size > 1:
 		    newlist = []
 		    current = self.root
@@ -80,7 +80,7 @@ class LinkedList(object):
 		    return newll
 	    return self
 
-    def print_list(self):
+    def print(self):
         l = []
         current = self.root
         while current:
@@ -100,6 +100,6 @@ myList.remove(8)
 print(myList.remove(12))
 print(myList.remove(13))
 print(myList.find(5))
-myList.print_list()
+myList.print()
 myList = myList.sort()
-myList.print_list()
+myList.print()
