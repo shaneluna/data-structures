@@ -15,6 +15,11 @@ class Node(object):
     def set_data(self, d):
         self.data = d
 
+    def has_next(self):
+        if self.get_next() is None:
+            return False
+        return True
+
 class LinkedList(object):
     def __init__(self, r=None):
         self.root = r
@@ -27,6 +32,12 @@ class LinkedList(object):
         new_node = Node(d, self.root)
         self.root = new_node
         self.size += 1
+
+    # for sort method
+    def add_node (self, n):
+	    n.set_next(self.root)
+	    self.root = n
+	    self.size += 1
 
     def remove(self, d):
         this_node = self.root
@@ -53,11 +64,46 @@ class LinkedList(object):
                 this_node = this_node.get_next()
         return None
 
+    # Timsort
+    def sort (self):
+	    if self.size > 1:
+		    newlist = []
+		    current = self.root
+		    newlist.append(self.root)
+		    while current.has_next():
+			    current = current.get_next()
+			    newlist.append(current)
+		    newlist = sorted(newlist, key = lambda node: node.get_data(), reverse = True)
+		    newll = LinkedList()
+		    for node in newlist:
+			    newll.add_node(node)
+		    return newll
+	    return self
+
+    def print_list(self):
+        if self.root is None:
+            print('[]')
+        strList = '['
+        current = self.root
+        strList += str(current.get_data())
+        while current.has_next():
+            current = current.get_next()
+            strList += ', ' + str(current.get_data())
+        strList += ']'
+        print(strList)
+
 myList = LinkedList()
 myList.add(5)
 myList.add(8)
 myList.add(12)
+myList.add(24)
+myList.add(99)
+myList.add(15)
+myList.add(3)
 myList.remove(8)
 print(myList.remove(12))
 print(myList.remove(13))
 print(myList.find(5))
+myList.print_list()
+myList = myList.sort()
+myList.print_list()
